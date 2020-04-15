@@ -1,11 +1,13 @@
-# redact-pii
+# basic-redact-pii
+
+> **NOTE**: This is a fork of the redact-pii package that removes the @google-cloud/dlp dependency and functionality.
 
 [![NPM Package](https://badge.fury.io/js/redact-pii.svg)](https://www.npmjs.com/package/redact-pii)
 [![Dependencies](https://david-dm.org/solvvy/redact-pii.svg)](https://david-dm.org/solvvy/redact-pii)
 
 > **NOTE**: Users of redact-pii@2.x.x please check the [Changelog](CHANGELOG.md) before upgrading .
 
-Remove personally identifiable information from text. 
+Remove personally identifiable information from text.
 
 ### Prerequesites
 
@@ -122,9 +124,8 @@ const redactor = new SyncRedactor({
   }
 });
 
-redactor.redact('This document is classified as TopSecret.')
+redactor.redact('This document is classified as TopSecret.');
 // THIS_FILE_IS_SO_TOP_SECRET_WE_HAD_TO_REDACT_EVERYTHING
-
 
 import { AsyncRedactor } from './src/index';
 
@@ -218,17 +219,16 @@ redactor.redactAsync('I live at 123 Park Ave Apt 123 New York City, NY 10002 and
 
 #### Google DLP content size limit
 
-The Google DLP service has a content size limit of 524288 bytes. If the input is over this limit, the `GoogleDLPRedactor` will 
-by default automatically split the content into smaller batches and then combine the results together again. If this 
-behavior is undesired, it can be disabled by setting the `disableAutoBatchWhenContentSizeExceedsLimit` option flag to 
+The Google DLP service has a content size limit of 524288 bytes. If the input is over this limit, the `GoogleDLPRedactor` will
+by default automatically split the content into smaller batches and then combine the results together again. If this
+behavior is undesired, it can be disabled by setting the `disableAutoBatchWhenContentSizeExceedsLimit` option flag to
 true:
 
 ```js
-new GoogleDLPRedactor({ disableAutoBatchWhenContentSizeExceedsLimit: true })
-
+new GoogleDLPRedactor({ disableAutoBatchWhenContentSizeExceedsLimit: true });
 ```
 
-There is no intelligence to try to prevent splitting the batches in the middle of a word.  If the batch happens to be 
+There is no intelligence to try to prevent splitting the batches in the middle of a word. If the batch happens to be
 split in the middle of a sensitive word then that word may not be redacted. You can always perform your own intelligent
 batching prior if needed.
 

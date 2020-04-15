@@ -1,14 +1,10 @@
-import { GoogleDLPRedactor, AsyncRedactor, SyncRedactor } from '../src';
+import { AsyncRedactor, SyncRedactor } from '../src';
 
 const redactor = new SyncRedactor();
-const compositeRedactorWithDLP = new AsyncRedactor({
-  customRedactors: {
-    after: [new GoogleDLPRedactor()]
-  }
-});
+const compositeRedactorWithDLP = new AsyncRedactor();
 
 describe('index.js', function() {
-  const runGoogleDLPTests = !!process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  const runGoogleDLPTests = false;
 
   type InputAssertionTuple = [string, string, string?];
 

@@ -1,4 +1,4 @@
-import { GoogleDLPRedactor, AsyncRedactor, SyncRedactor } from '../src';
+import { AsyncRedactor, SyncRedactor } from '../src';
 
 const redactor = new SyncRedactor();
 const compositeRedactorWithDLP = new AsyncRedactor({
@@ -16,13 +16,12 @@ const compositeRedactorWithDLP = new AsyncRedactor({
         regexpPattern: /(banana|apple|orange)/,
         replaceWith: 'FOOD'
       }
-    ],
-    after: [new GoogleDLPRedactor()]
+    ]
   }
 });
 
 describe('index.js', function() {
-  const runGoogleDLPTests = !!process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  const runGoogleDLPTests = false;
 
   type InputAssertionTuple = [string, string, string?];
 
